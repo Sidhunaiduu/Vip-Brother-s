@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090909">
+<meta name="theme-color" content="#08090c">
 
-<title>VIP BROTHER'S - Private Pass</title>
+<title>VIP BROTHER'S | Private Invitation</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -16,37 +18,107 @@
     box-sizing: border-box;
 }
 
+:root {
+    --white: #ffffff;
+    --muted: #a6a6ad;
+}
+
 body {
     min-height: 100vh;
-    background: #090909;
-    font-family: 'Inter', sans-serif;
+    min-height: 100svh;
+    background: #08090c;
     color: white;
+    font-family: 'Inter', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    padding: 20px;
+    overflow-x: hidden;
+    padding: 24px 18px;
 }
+
+/* BACKGROUND */
 
 .background {
     position: fixed;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
+    z-index: 0;
 }
 
-.star {
+.aurora {
     position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .22;
+    animation: auroraMove 12s ease-in-out infinite alternate;
+}
+
+.aurora.one {
+    background: #13d9a0;
+    top: -240px;
+    left: -180px;
+}
+
+.aurora.two {
+    background: #9456f5;
+    bottom: -250px;
+    right: -180px;
+    animation-delay: -5s;
+}
+
+.aurora.three {
+    background: #ed68ad;
+    top: 35%;
+    left: 35%;
+    opacity: .12;
+    animation-delay: -8s;
+}
+
+@keyframes auroraMove {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(100px, 60px) scale(1.2);
+    }
+    100% {
+        transform: translate(-60px, 120px) scale(.9);
+    }
+}
+
+/* PARTICLES */
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
     background: white;
     border-radius: 50%;
     opacity: .4;
-    animation: twinkle 3s infinite alternate;
+    animation: floatParticle linear infinite;
 }
 
-@keyframes twinkle {
-    from { opacity: .15; }
-    to { opacity: .8; }
+@keyframes floatParticle {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    15% {
+        opacity: .6;
+    }
+    85% {
+        opacity: .5;
+    }
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
 }
+
+/* MAIN */
 
 .container {
     width: 100%;
@@ -54,38 +126,69 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
+    animation: pageEnter 1s cubic-bezier(.2,.8,.2,1) both;
 }
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* TOP */
 
 .top-title {
     font-size: 10px;
     letter-spacing: 4px;
-    font-weight: 600;
-    color: #d6d6d6;
-    margin-bottom: 25px;
+    font-weight: 700;
+    color: #dedee3;
+    margin-bottom: 26px;
 }
+
+.top-title span {
+    color: #b9a0e8;
+    margin: 0 7px;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    50% {
+        opacity: .35;
+        text-shadow: 0 0 15px white;
+    }
+}
+
+/* TICKET */
 
 .ticket {
     position: relative;
     width: 100%;
     padding: 23px 20px 20px;
-    border-radius: 19px;
+    border-radius: 20px;
     color: #111;
     overflow: hidden;
 
     background: linear-gradient(
-        120deg,
-        #f5e5e9,
-        #d8f4f1,
-        #f8e5d9,
-        #eee0f7,
-        #d9f3ed,
-        #f5e5e9
+        125deg,
+        #f4e2e9,
+        #d8f2ef,
+        #f5e6d7,
+        #e7dafa,
+        #d5eeea,
+        #f5dce9
     );
 
-    background-size: 400% 400%;
-    animation: hologram 9s ease infinite;
+    background-size: 350% 350%;
+    animation: hologram 8s ease infinite;
 
-    box-shadow: 0 0 35px rgba(255,255,255,.09);
+    box-shadow:
+        0 0 35px rgba(255,255,255,.08),
+        0 15px 60px rgba(0,0,0,.35);
 }
 
 @keyframes hologram {
@@ -94,29 +197,66 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.ticket::before,
+/* SHIMMER */
+
 .ticket::after {
     content: "";
     position: absolute;
-    width: 23px;
-    height: 23px;
-    background: #111;
-    border-radius: 50%;
-    top: 62%;
+    top: -100%;
+    left: -100%;
+    width: 65%;
+    height: 300%;
+    transform: rotate(25deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.48),
+        transparent
+    );
+    animation: shimmer 6s ease-in-out infinite;
+    pointer-events: none;
 }
+
+@keyframes shimmer {
+    0%, 35% {
+        left: -100%;
+    }
+    65%, 100% {
+        left: 150%;
+    }
+}
+
+/* TICKET CUTS */
 
 .ticket::before {
-    left: -13px;
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #08090c;
+    border-radius: 50%;
+    top: 63%;
+    left: -14px;
+    z-index: 3;
 }
 
-.ticket::after {
-    right: -13px;
+.ticket .right-cut {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #08090c;
+    border-radius: 50%;
+    top: 63%;
+    right: -14px;
+    z-index: 3;
 }
+
+/* HEADER */
 
 .ticket-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     font-size: 8px;
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -126,38 +266,51 @@ body {
 .private {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
 .dot {
     width: 7px;
     height: 7px;
-    background: #54a9c8;
+    background: #39aeb4;
     border-radius: 50%;
+    box-shadow: 0 0 8px #39aeb4;
 }
+
+/* LOGO */
 
 .logo-area {
     position: relative;
-    margin: 24px auto 13px;
     width: 90px;
     height: 90px;
+    margin: 25px auto 15px;
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .logo {
     width: 90px;
     height: 90px;
-    border-radius: 19px;
     object-fit: cover;
-    border: 3px solid rgba(255,255,255,.8);
-    box-shadow: 0 5px 18px #0002;
+    border-radius: 19px;
+    border: 3px solid rgba(255,255,255,.9);
+    box-shadow: 0 5px 22px rgba(0,0,0,.15);
 }
 
 .verified {
     position: absolute;
     bottom: -5px;
     right: -5px;
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     background: #269bd4;
     border: 3px solid white;
     border-radius: 50%;
@@ -169,11 +322,13 @@ body {
     font-weight: 900;
 }
 
+/* TITLE */
+
 .channel-name {
     font-size: 21px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: #080808;
+    font-weight: 900;
+    letter-spacing: -.7px;
+    color: #101014;
     margin-top: 15px;
     white-space: nowrap;
 }
@@ -181,43 +336,47 @@ body {
 .channel-subtitle {
     font-size: 10px;
     color: #666;
-    margin-top: 5px;
+    margin-top: 6px;
+    letter-spacing: .3px;
 }
+
+/* DETAILS */
 
 .details {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 24px;
-    padding: 13px 0 14px;
-    border-bottom: 1px solid rgba(0,0,0,.12);
-    border-top: 1px solid rgba(0,0,0,.12);
+    padding: 14px 0;
+    border-top: 1px solid rgba(0,0,0,.13);
+    border-bottom: 1px solid rgba(0,0,0,.13);
 }
 
 .detail-label {
     font-size: 7px;
+    font-weight: 800;
     letter-spacing: 1px;
-    color: #666;
-    font-weight: 700;
-    margin-bottom: 5px;
+    color: #777;
+    margin-bottom: 6px;
 }
 
 .detail-value {
     font-size: 11px;
-    font-weight: 800;
-    color: #111;
+    font-weight: 900;
+    color: #151515;
 }
+
+/* BARCODE */
 
 .ticket-bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding-top: 13px;
+    justify-content: space-between;
+    padding-top: 14px;
 }
 
 .barcode {
-    width: 112px;
+    width: 115px;
     height: 30px;
-
     background: repeating-linear-gradient(
         90deg,
         #111 0px,
@@ -238,98 +397,163 @@ body {
 .invite-number small {
     display: block;
     font-size: 7px;
-    letter-spacing: 1px;
     color: #777;
-    margin-bottom: 3px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
 }
 
 .invite-number strong {
     font-size: 12px;
     letter-spacing: 2px;
+    color: #111;
 }
 
+/* BUTTON */
+
 .button-area {
-    margin-top: 15px;
+    margin-top: 17px;
 }
 
 .join-button {
+    position: relative;
+    isolation: isolate;
     width: 100%;
-    height: 54px;
-    border: none;
+    min-height: 56px;
     border-radius: 40px;
-
-    background: linear-gradient(
-        100deg,
-        #85e9e1,
-        #e3d0fa,
-        #ffc5a9,
-        #f7c3db,
-        #a8e9e4
-    );
-
-    background-size: 300% 300%;
-    animation: buttonGlow 5s ease infinite;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
+    overflow: visible;
+
+    background: linear-gradient(
+        110deg,
+        #84e9dc,
+        #d9c5f5,
+        #ffc4a9,
+        #f3bdda,
+        #9ce7df
+    );
+
+    background-size: 300% 300%;
+    animation: buttonGradient 5s ease infinite;
 
     color: #111;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
-
     text-decoration: none;
-    box-shadow: 0 5px 25px rgba(255,255,255,.12);
-    transition: .3s;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .8px;
+
+    box-shadow: 0 0 20px rgba(206,178,245,.18);
+    transition: transform .3s;
 }
 
-@keyframes buttonGlow {
+.join-button::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 50px;
+    background: linear-gradient(
+        90deg,
+        #75e9da,
+        #b999f2,
+        #f3a9cb,
+        #75e9da
+    );
+    background-size: 300% 300%;
+    filter: blur(15px);
+    opacity: .45;
+    z-index: -1;
+    animation: buttonGradient 5s linear infinite;
+}
+
+@keyframes buttonGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-.join-button:hover {
-    transform: scale(1.025);
+.join-button:active {
+    transform: scale(.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .join-button:hover {
+        transform: translateY(-3px) scale(1.015);
+    }
 }
 
 .arrow {
-    width: 24px;
-    height: 24px;
-    background: #111;
-    color: white;
-    border-radius: 50%;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    background: #111;
+    color: white;
     font-size: 15px;
 }
 
+/* CURSOR GLOW */
+
+.cursor-glow {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(176,139,255,.12),
+        transparent 70%
+    );
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0;
+}
+
+/* FOOTER */
+
 .footer {
-    margin-top: 13px;
+    margin-top: 17px;
     font-size: 8px;
     letter-spacing: 2px;
-    color: #aaa;
+    color: #a3a3a9;
 }
 
 .footer span {
-    color: #fff;
-    margin-right: 8px;
+    color: #d6b9fa;
+    margin-right: 7px;
 }
+
+/* SMALL SCREENS */
 
 @media(max-width:360px) {
     .container {
         max-width: 340px;
     }
 
+    .ticket {
+        padding: 20px 16px;
+    }
+
     .channel-name {
         font-size: 19px;
     }
 
-    .ticket {
-        padding: 20px 16px;
+    .barcode {
+        width: 95px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
     }
 }
 </style>
@@ -337,40 +561,68 @@ body {
 
 <body>
 
-<div class="background" id="stars"></div>
+<!-- BACKGROUND -->
 
-<div class="container">
+<div class="background" id="background">
+
+    <div class="aurora one"></div>
+    <div class="aurora two"></div>
+    <div class="aurora three"></div>
+
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
 
     <div class="top-title">
-        ✦ &nbsp; YOU'RE INVITED &nbsp; ✦
+        <span>✦</span> YOU'RE INVITED <span>✦</span>
     </div>
 
-    <div class="ticket">
+    <!-- INVITATION TICKET -->
+
+    <section class="ticket">
+
+        <div class="right-cut"></div>
 
         <div class="ticket-header">
+
             <div class="private">
                 <span class="dot"></span>
                 PRIVATE PASS
             </div>
 
             <div>ADMIT ONE</div>
+
         </div>
+
+        <!-- LOGO -->
 
         <div class="logo-area">
 
-            <img src="logo.png" class="logo" alt="VIP BROTHER'S Logo">
+            <img
+                src="logo.png"
+                class="logo"
+                alt="VIP BROTHER'S Logo"
+            >
 
             <div class="verified">✓</div>
 
         </div>
+
+        <!-- CHANNEL NAME -->
 
         <h1 class="channel-name">
             VIP BROTHER'S
         </h1>
 
         <p class="channel-subtitle">
-            Official Telegram channel
+            Official Telegram Community
         </p>
+
+        <!-- DETAILS -->
 
         <div class="details">
 
@@ -391,27 +643,36 @@ body {
 
         </div>
 
+        <!-- BARCODE -->
+
         <div class="ticket-bottom">
 
             <div class="barcode"></div>
 
             <div class="invite-number">
+
                 <small>INVITE NO</small>
+
                 <strong>4623</strong>
+
             </div>
 
         </div>
 
-    </div>
+    </section>
+
+    <!-- ACCEPT BUTTON -->
 
     <div class="button-area">
 
-        <a href="https://t.me/+AB7Cz-OtoKo0MDg1"
-           class="join-button"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a
+            href="https://t.me/+AB7Cz-OtoKo0MDg1"
+            class="join-button"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
 
-            Accept invite
+            ACCEPT INVITE
 
             <span class="arrow">➜</span>
 
@@ -420,55 +681,88 @@ body {
     </div>
 
     <div class="footer">
-        <span>FREE</span> OPENS IN TELEGRAM
+        <span>●</span> FREE ENTRY · OPENS IN TELEGRAM
     </div>
 
-</div>
+</main>
 
 <script>
 
-/* STAR ANIMATION */
+/* RANDOM FLOATING PARTICLES */
 
-const stars = document.getElementById("stars");
+const background = document.getElementById("background");
 
-for (let i = 0; i < 65; i++) {
+for (let i = 0; i < 55; i++) {
 
-    const star = document.createElement("div");
+    const particle = document.createElement("div");
 
-    star.className = "star";
+    particle.className = "particle";
 
-    const size = Math.random() * 2 + 1;
+    particle.style.left = Math.random() * 100 + "%";
 
-    star.style.width = size + "px";
-    star.style.height = size + "px";
+    particle.style.top = Math.random() * 100 + "%";
 
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
+    particle.style.animationDuration =
+        (7 + Math.random() * 13) + "s";
 
-    star.style.animationDelay = Math.random() * 3 + "s";
+    particle.style.animationDelay =
+        (-Math.random() * 15) + "s";
 
-    stars.appendChild(star);
+    const size = 1 + Math.random() * 2;
+
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+
+    background.appendChild(particle);
+
 }
 
-/* AUTOMATIC CURRENT DATE */
+/* AUTOMATIC DATE */
 
 function updateDate() {
 
-    const today = new Date();
+    const now = new Date();
 
-    const date = today.getDate();
+    const date = now.getDate();
 
-    const month = today.toLocaleString('en-US', {
-        month: 'short'
+    const month = now.toLocaleString("en-US", {
+        month: "short"
     });
 
     document.getElementById("currentDate").textContent =
         date + " " + month.toUpperCase();
+
 }
 
 updateDate();
 
+/* UPDATE DATE WHEN DAY CHANGES */
+
+setInterval(updateDate, 60000);
+
+/* MOUSE GLOW */
+
+const cursorGlow = document.getElementById("cursorGlow");
+
+if (
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches
+) {
+
+    window.addEventListener("mousemove", function(e) {
+
+        cursorGlow.style.left = e.clientX + "px";
+        cursorGlow.style.top = e.clientY + "px";
+        cursorGlow.style.opacity = "1";
+
+    });
+
+    document.addEventListener("mouseleave", function() {
+        cursorGlow.style.opacity = "0";
+    });
+
+}
+
 </script>
 
 </body>
-        </html>
+    </html>
