@@ -28,8 +28,6 @@ body {
     padding: 20px;
 }
 
-/* BACKGROUND */
-
 .background {
     position: fixed;
     inset: 0;
@@ -50,8 +48,6 @@ body {
     to { opacity: .8; }
 }
 
-/* MAIN CONTAINER */
-
 .container {
     width: 100%;
     max-width: 390px;
@@ -59,8 +55,6 @@ body {
     z-index: 2;
     text-align: center;
 }
-
-/* TOP TEXT */
 
 .top-title {
     font-size: 10px;
@@ -70,13 +64,6 @@ body {
     margin-bottom: 25px;
 }
 
-.top-title span {
-    color: #fff;
-    margin: 0 8px;
-}
-
-/* TICKET */
-
 .ticket {
     position: relative;
     width: 100%;
@@ -85,8 +72,7 @@ body {
     color: #111;
     overflow: hidden;
 
-    background:
-    linear-gradient(
+    background: linear-gradient(
         120deg,
         #f5e5e9,
         #d8f4f1,
@@ -108,8 +94,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* TICKET CUTS */
-
 .ticket::before,
 .ticket::after {
     content: "";
@@ -128,8 +112,6 @@ body {
 .ticket::after {
     right: -13px;
 }
-
-/* HEADER */
 
 .ticket-header {
     display: flex;
@@ -153,8 +135,6 @@ body {
     background: #54a9c8;
     border-radius: 50%;
 }
-
-/* LOGO */
 
 .logo-area {
     position: relative;
@@ -189,8 +169,6 @@ body {
     font-weight: 900;
 }
 
-/* CHANNEL NAME */
-
 .channel-name {
     font-size: 21px;
     font-weight: 800;
@@ -205,8 +183,6 @@ body {
     color: #666;
     margin-top: 5px;
 }
-
-/* DETAILS */
 
 .details {
     display: grid;
@@ -231,8 +207,6 @@ body {
     color: #111;
 }
 
-/* BOTTOM TICKET */
-
 .ticket-bottom {
     display: flex;
     justify-content: space-between;
@@ -244,8 +218,7 @@ body {
     width: 112px;
     height: 30px;
 
-    background:
-    repeating-linear-gradient(
+    background: repeating-linear-gradient(
         90deg,
         #111 0px,
         #111 2px,
@@ -274,8 +247,6 @@ body {
     font-size: 12px;
     letter-spacing: 2px;
 }
-
-/* BUTTON */
 
 .button-area {
     margin-top: 15px;
@@ -336,8 +307,6 @@ body {
     font-size: 15px;
 }
 
-/* FOOTER */
-
 .footer {
     margin-top: 13px;
     font-size: 8px;
@@ -349,8 +318,6 @@ body {
     color: #fff;
     margin-right: 8px;
 }
-
-/* MOBILE */
 
 @media(max-width:360px) {
     .container {
@@ -391,8 +358,6 @@ body {
 
         <div class="logo-area">
 
-            <!-- Upload your logo as logo.png -->
-
             <img src="logo.png" class="logo" alt="VIP BROTHER'S Logo">
 
             <div class="verified">✓</div>
@@ -421,7 +386,7 @@ body {
 
             <div>
                 <div class="detail-label">DATE</div>
-                <div class="detail-value">2 NOV</div>
+                <div class="detail-value" id="currentDate">--</div>
             </div>
 
         </div>
@@ -483,10 +448,27 @@ for (let i = 0; i < 65; i++) {
     star.style.animationDelay = Math.random() * 3 + "s";
 
     stars.appendChild(star);
-
 }
+
+/* AUTOMATIC CURRENT DATE */
+
+function updateDate() {
+
+    const today = new Date();
+
+    const date = today.getDate();
+
+    const month = today.toLocaleString('en-US', {
+        month: 'short'
+    });
+
+    document.getElementById("currentDate").textContent =
+        date + " " + month.toUpperCase();
+}
+
+updateDate();
 
 </script>
 
 </body>
-</html>
+        </html>
